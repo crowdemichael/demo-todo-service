@@ -1,0 +1,23 @@
+// protoc -I . grpc/user/user.proto --go_out=plugins=grpc:.
+syntax = "proto3";
+
+package user;
+
+import "grpc/common/common.proto";
+
+option go_package = "grpc/user";
+
+message User {
+    int64 id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message IdInput {
+    int64 id = 1;
+}
+
+service Users {
+    rpc CreateUser (User) returns (common.Response);
+    rpc GetUserProfile (IdInput) returns (common.Response);
+}
